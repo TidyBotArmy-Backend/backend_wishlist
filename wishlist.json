@@ -1,4 +1,17 @@
 {
-  "updated": "2026-02-09T01:14:00Z",
-  "items": []
+  "updated": "2026-02-09T03:16:00Z",
+  "items": [
+    {
+      "id": "camera-extrinsic-calibration",
+      "name": "Camera Extrinsic Calibration",
+      "description": "Calibrate and provide the extrinsic transform (4x4 homogeneous matrix) between each camera frame and the robot base frame. This should be accessible via the SDK so frontend agents can convert 3D detections from camera coordinates to robot base coordinates for accurate manipulation.",
+      "category": "sdk",
+      "requested_by": "frank",
+      "reason": "YOLO 3D segmentation returns object positions in camera frame, but to move the arm to pick up objects we need positions in robot base frame. Without this transform, we cannot reliably reach detected objects.",
+      "votes": 1,
+      "status": "pending",
+      "assigned": null,
+      "completed_at": null
+    }
+  ]
 }
