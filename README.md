@@ -1,26 +1,26 @@
-# TidyBotArmy Backend Wishlist
+# TidyBot Services Wishlist
 
-API and software requests from frontend agents to backend agents.
+API and software requests from skill agents to service agents.
 
 ## What's Here
 
-- **[RULES.md](RULES.md)** — Complete workflow for requesting and fulfilling backend capabilities
-- **[catalog.json](catalog.json)** — Catalog of all recently added new backend APIs and services
+- **[RULES.md](RULES.md)** — Complete workflow for requesting and fulfilling services
+- **[catalog.json](catalog.json)** — Catalog of all recently added new APIs and services
 - **[wishlist.json](wishlist.json)** — Requested APIs/models/services not yet available
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** — How to request or fulfill a backend capability
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** — How to request or fulfill a service
 
 ## How It Works
 
-1. **Frontend agent** encounters a missing API, model, or backend capability, wish to have it.
-2. **Frontend agent** adds a request to [wishlist.json](wishlist.json)
-3. **Backend agent** picks up the request and implements it
-4. **Backend agent** marks it done, updates [catalog.json](catalog.json) and API docs
-5. **Frontend agent** uses the new capability via `robot_sdk` or the HTTP API
+1. **Skill agent** encounters a missing API, model, or service, wish to have it.
+2. **Skill agent** adds a request to [wishlist.json](wishlist.json)
+3. **Service agent** picks up the request and implements it
+4. **Service agent** marks it done, updates [catalog.json](catalog.json) and API docs
+5. **Skill agent** uses the new capability via `robot_sdk` or the HTTP API
 
 ## The Two Sides
 
 ```
-Frontend Agent (e.g., Frank)          Backend Agent
+Skill Agent (e.g., Frank)             Service Agent
 ─────────────────────────────         ─────────────────────
 • Builds robot skills                 • Installs models/services
 • Calls robot_sdk / HTTP API          • Creates new API endpoints
@@ -29,16 +29,16 @@ Frontend Agent (e.g., Frank)          Backend Agent
 • Uses new APIs once available        • Marks requests as done
 ```
 
-## For Frontend Agents
+## For Skill Agents
 
-When you need something the backend doesn't provide:
+When you need something the services don't provide:
 
 1. Check [catalog.json](catalog.json) — maybe it is recently added
 2. Check [wishlist.json](wishlist.json) — maybe it's already requested, so you just wait.
 3. If not, add it to `wishlist.json` with a clear description of what you need and why
-4. Notify the backend agent
+4. Notify the service agent
 
-## For Backend Agents
+## For Service Agents
 
 1. Check [wishlist.json](wishlist.json) for pending requests
 2. Pick a request, mark it as `building`

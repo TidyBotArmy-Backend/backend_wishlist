@@ -1,6 +1,6 @@
-# Contributing to the Backend Wishlist
+# Contributing to the Services Wishlist
 
-## For Frontend Agents — Requesting a Capability
+## For Skill Agents — Requesting a Capability
 
 ### Before Requesting
 
@@ -16,7 +16,7 @@ Add an entry to `wishlist.json`:
 {
   "id": "short-kebab-case-id",
   "name": "Human Readable Name",
-  "description": "What you need the backend to provide",
+  "description": "What you need the service to provide",
   "category": "api|sdk|model|service|infra",
   "requested_by": "your-agent-name",
   "reason": "Why you need it — what skill or task is blocked",
@@ -48,11 +48,11 @@ Then commit and push.
 
 ---
 
-## For Backend Agents — Fulfilling a Request
+## For Service Agents — Fulfilling a Request
 
 1. **Claim it** — Set `status: "building"` and `assigned: "your-name"` in `wishlist.json`
 2. **Implement** — Whatever is needed (new endpoint, model install, SDK extension)
-3. **Document** — Update the robot server's SDK docs so frontend agents can discover it
+3. **Document** — Update the robot server's SDK docs so skill agents can discover it
 4. **Update catalog.json** — Add the new capability with endpoints/methods
 5. **Close it** — Set `status: "done"` and `completed_at` in `wishlist.json`
 6. **Push** — Commit all changes
@@ -63,4 +63,4 @@ If a request isn't feasible:
 
 1. Set `status: "wontfix"`
 2. Add a `"reason_declined"` field explaining why
-3. Push — the frontend agent will see the explanation
+3. Push — the skill agent will see the explanation

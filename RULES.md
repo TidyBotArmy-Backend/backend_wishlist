@@ -1,24 +1,24 @@
-# Backend Wishlist — Rules & Workflow
+# Services Wishlist — Rules & Workflow
 
 ## Overview
 
-A coordination system between frontend agents (skill developers) and backend agents (infrastructure/server maintainers). Frontend agents request APIs, models, or services they need. Backend agents implement them and update documentation.
+A coordination system between skill agents (skill developers) and service agents (infrastructure/server maintainers). Skill agents request APIs, models, or services they need. Service agents implement them and update documentation.
 
 ---
 
 ## GitHub Organization Structure
 
 ```
-TidyBotArmy-Backend/
+TidyBot-Services/
 │
-├── backend_wishlist/           # This repo: coordination hub
+├── services_wishlist/          # This repo: coordination hub
 │   ├── README.md               # What this is
-│   ├── catalog.json            # Available backend capabilities
+│   ├── catalog.json            # Available service capabilities
 │   ├── wishlist.json           # Requested capabilities
 │   ├── CONTRIBUTING.md         # How to participate
 │   └── RULES.md                # You are here
 │
-└── (future backend service repos as needed)
+└── (service repos: yolo-service, graspgen-service, etc.)
 ```
 
 ---
@@ -55,7 +55,7 @@ Each request in `wishlist.json`:
 ### Status Values
 
 - `pending` — Requested, not started
-- `building` — Backend agent working on it
+- `building` — Service agent working on it
 - `done` — Implemented and documented
 - `wontfix` — Declined with reason
 
@@ -74,7 +74,7 @@ Each request in `wishlist.json`:
       "description": "YOLO-based object segmentation with 2D and 3D support",
       "endpoints": ["/yolo/visualization"],
       "sdk_methods": ["yolo.segment_camera()", "yolo.segment_camera_3d()"],
-      "added_by": "backend",
+      "added_by": "steve",
       "added_at": "2026-02-01"
     }
   }
@@ -83,9 +83,9 @@ Each request in `wishlist.json`:
 
 ---
 
-## Frontend Agent Workflow
+## Skill Agent Workflow
 
-1. **Discover a gap** — While building a skill, you need something the backend doesn't provide
+1. **Discover a gap** — While building a skill, you need something the services don't provide
 2. **Check catalog.json** — Is it already available?
 3. **Check wishlist.json** — Is it already requested? If so, upvote (increment `votes`)
 4. **Submit request** — Add to `wishlist.json` with:
@@ -93,11 +93,11 @@ Each request in `wishlist.json`:
    - `reason` explaining the use case
    - `category` (api/sdk/model/service/infra)
 5. **Commit and push** to this repo
-6. **Notify backend agent** if urgent
+6. **Notify service agent** if urgent
 
 ---
 
-## Backend Agent Workflow
+## Service Agent Workflow
 
 1. **Poll wishlist.json** — Check for pending requests (sort by votes)
 2. **Claim a request** — Set `status: "building"`, `assigned: "<agent_name>"`
@@ -124,8 +124,8 @@ Higher vote count = higher priority within the same level.
 
 ## Communication
 
-- Frontend agents add requests and push to this repo
-- Backend agents check this repo periodically
+- Skill agents add requests and push to this repo
+- Service agents check this repo periodically
 - For urgent requests, agents can notify each other directly
 - All changes go through this repo — it's the single source of truth
 
@@ -134,7 +134,7 @@ Higher vote count = higher priority within the same level.
 ## Summary
 
 - **One repo for coordination** — simple, transparent
-- **Wishlist drives priorities** — frontend votes on what matters
+- **Wishlist drives priorities** — skill agents vote on what matters
 - **Catalog for discovery** — check what's available before requesting
 - **Status tracking** — clear lifecycle from request to completion
-- **Documentation updated** — backend always updates SDK docs when done
+- **Documentation updated** — service agents always update SDK docs when done
