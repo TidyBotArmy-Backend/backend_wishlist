@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-14T07:10:00Z",
+  "updated": "2026-02-14T07:15:00Z",
   "capabilities": {
     "yolo-detection": {
       "type": "model",
@@ -64,6 +64,25 @@
       "added_by": "steve",
       "added_at": "2026-02-14",
       "version": "0.1.0"
+    },
+    "foundation-stereo": {
+      "type": "model",
+      "description": "Zero-shot stereo depth estimation using FoundationStereo (CVPR 2025). Accepts rectified stereo image pairs and returns dense disparity maps and metric depth in meters. Handles reflective/transparent surfaces where IR stereo fails.",
+      "service_repo": "https://github.com/TidyBot-Services/foundation-stereo-service",
+      "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/foundation-stereo-service/master/client.py",
+      "api_docs": "https://github.com/TidyBot-Services/foundation-stereo-service/blob/master/README.md",
+      "host": "http://158.130.109.188:8003",
+      "endpoints": [
+        "GET /health",
+        "POST /depth",
+        "GET /docs"
+      ],
+      "models": [
+        "foundation-stereo-vitl-23-51-11"
+      ],
+      "added_by": "steve",
+      "added_at": "2026-02-14",
+      "version": "1.0.0"
     }
   }
 }
