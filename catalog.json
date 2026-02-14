@@ -1,4 +1,22 @@
 {
-  "updated": "2026-02-09T01:14:00Z",
-  "capabilities": {}
+  "updated": "2026-02-13T21:50:00Z",
+  "capabilities": {
+    "yolo-detection": {
+      "type": "model",
+      "description": "YOLO object detection and instance segmentation. Supports multiple model sizes (nano to xlarge). Returns bounding boxes, class labels, confidence scores, and optional segmentation masks (polygon, RLE, or bitmap).",
+      "service_repo": "https://github.com/TidyBot-Services/yolo-service",
+      "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/yolo-service/main/client.py",
+      "api_docs": "https://github.com/TidyBot-Services/yolo-service/blob/main/README.md",
+      "host": "http://158.130.109.188:8000",
+      "endpoints": [
+        "GET /health",
+        "POST /detect",
+        "GET /docs"
+      ],
+      "models": ["yolov8n", "yolov8s", "yolov8m", "yolov8l", "yolov8x", "yolov8n-seg", "yolov8s-seg"],
+      "added_by": "steve",
+      "added_at": "2026-02-13",
+      "version": "0.2.0"
+    }
+  }
 }
