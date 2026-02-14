@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-14T01:35:00Z",
+  "updated": "2026-02-14T01:40:00Z",
   "items": [
     {
       "id": "camera-extrinsic-calibration",
@@ -20,6 +20,18 @@
       "category": "model",
       "requested_by": "tidybot",
       "reason": "YOLO detection is limited to its fixed class vocabulary. For real-world manipulation tasks we need open-vocabulary perception — the ability to detect and segment arbitrary objects described in natural language. Grounded SAM 2 enables this by combining Grounding DINO's text-conditioned detection with SAM 2's high-quality segmentation.",
+      "votes": 1,
+      "status": "pending",
+      "assigned": null,
+      "completed_at": null
+    },
+    {
+      "id": "graspgen",
+      "name": "GraspGen",
+      "description": "Host GraspGen as a backend service for 6-DOF grasp pose generation. Accepts a depth image or point cloud of a scene (optionally with a target object mask or region of interest) and returns ranked candidate grasp poses (position + orientation) with quality scores. Should output grasps as 4x4 homogeneous transforms suitable for direct use with the Franka arm.",
+      "category": "model",
+      "requested_by": "tidybot",
+      "reason": "Currently there is no automated way to compute stable grasp poses for arbitrary objects. Perception models like YOLO and Grounded SAM 2 can detect and segment objects, but translating that into a feasible end-effector pose for the Franka gripper requires a dedicated grasp generation model. GraspGen closes this gap in the pick-and-place pipeline.",
       "votes": 1,
       "status": "pending",
       "assigned": null,
