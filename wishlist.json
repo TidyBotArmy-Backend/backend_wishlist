@@ -45,8 +45,8 @@
       "requested_by": "tidybot",
       "reason": "RealSense IR stereo depth is noisy on reflective and transparent surfaces commonly found in tabletop manipulation (e.g., glass, plastic wrap, metallic objects). FoundationStereo provides learned stereo matching that handles these failure cases, giving more reliable depth for downstream tasks like grasp generation and 3D segmentation.",
       "votes": 1,
-      "status": "pending",
-      "assigned": null,
+      "status": "building",
+      "assigned": "steve",
       "completed_at": null
     }
   ]
