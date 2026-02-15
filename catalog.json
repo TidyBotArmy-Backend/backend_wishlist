@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-14T07:15:00Z",
+  "updated": "2026-02-15T08:59:00Z",
   "capabilities": {
     "yolo-detection": {
       "type": "model",
@@ -83,6 +83,25 @@
       "added_by": "steve",
       "added_at": "2026-02-14",
       "version": "1.0.0"
+    },
+    "nav-mapping": {
+      "type": "service",
+      "description": "2D occupancy grid mapping from depth images + robot pose. A* path planning with obstacle inflation and frontier detection for autonomous exploration.",
+      "service_repo": "https://github.com/TidyBot-Services/nav-mapping-service",
+      "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/nav-mapping-service/master/client.py",
+      "api_docs": "https://github.com/TidyBot-Services/nav-mapping-service/blob/master/README.md",
+      "host": "http://158.130.109.188:8004",
+      "endpoints": [
+        "GET /health",
+        "POST /update",
+        "GET /map",
+        "POST /plan",
+        "GET /frontiers",
+        "POST /reset"
+      ],
+      "added_by": "steve",
+      "added_at": "2026-02-15",
+      "version": "0.1.0"
     }
   }
 }
