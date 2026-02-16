@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-16T07:19:08Z",
+  "updated": "2026-02-16T07:58:00Z",
   "items": [
     {
       "id": "camera-extrinsic-calibration",
@@ -93,8 +93,8 @@
       "requested_by": "jarvis",
       "reason": "GraspGen is available but diffusion-based models are heavier and slower. For real-time closed-loop grasping \u2014 where the robot needs to re-evaluate grasps as it approaches \u2014 we need something that runs in under 50ms. GR-ConvNet v2 does 14-20ms inference on RGB-D, graspnet-baseline has pretrained RealSense checkpoints, and AnyGrasp offers a ready-made SDK. A lightweight grasp service would complement the existing visual servoing skills by providing smarter grasp pose selection instead of relying on fixed approach angles.",
       "votes": 1,
-      "status": "pending",
-      "assigned": null,
+      "status": "building",
+      "assigned": "steve",
       "completed_at": null
     },
     {
@@ -105,8 +105,8 @@
       "requested_by": "jarvis",
       "reason": "The base currently drives blind \u2014 move_to_pose and move_delta have no awareness of obstacles. The front-facing RealSense base_cam already provides depth that can be projected into a 2D slice for obstacle detection. A local planner (DWA or VFH) running at 10-30Hz on the depth stream would let the base navigate safely around chairs, tables, and people without needing a full SLAM map. This is the minimum viable safety layer for autonomous base movement.",
       "votes": 1,
-      "status": "pending",
-      "assigned": null,
+      "status": "building",
+      "assigned": "steve",
       "completed_at": null
     }
   ]
