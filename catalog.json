@@ -44,7 +44,12 @@
       ],
       "added_by": "steve",
       "added_at": "2026-02-14",
-      "version": "0.1.0"
+      "version": "0.1.0",
+      "usage": {
+        "import": "from services.grounded_sam2.client import GroundedSAM2Client",
+        "example": "client = GroundedSAM2Client()\ndetections = client.detect(image_bytes, prompts=['red cup'])",
+        "returns": "List of dicts with keys: label, confidence, bbox {x1,y1,x2,y2}"
+      }
     },
     "graspgen": {
       "type": "model",
@@ -63,7 +68,12 @@
       ],
       "added_by": "steve",
       "added_at": "2026-02-14",
-      "version": "0.1.0"
+      "version": "0.1.0",
+      "usage": {
+        "import": "from services.graspgen.client import GraspGenClient",
+        "example": "client = GraspGenClient()\ngrasps = client.generate(depth_bytes, num_grasps=10)",
+        "returns": "List of dicts with keys: transform (4x4), score, contact_point [x,y,z], gripper_opening"
+      }
     },
     "foundation-stereo": {
       "type": "model",
@@ -82,7 +92,12 @@
       ],
       "added_by": "steve",
       "added_at": "2026-02-14",
-      "version": "1.0.0"
+      "version": "1.0.0",
+      "usage": {
+        "import": "from services.foundation_stereo.client import FoundationStereoClient",
+        "example": "client = FoundationStereoClient()\nresult = client.depth(left_bytes, right_bytes, focal_length=382.5, baseline=0.055)",
+        "returns": "Dict with depth (np.ndarray HxW float32 meters), disparity (np.ndarray), inference_ms"
+      }
     },
     "nav-mapping": {
       "type": "service",
@@ -101,7 +116,12 @@
       ],
       "added_by": "steve",
       "added_at": "2026-02-15",
-      "version": "0.1.0"
+      "version": "0.1.0",
+      "usage": {
+        "import": "from services.nav_mapping.client import NavMappingClient",
+        "example": "client = NavMappingClient()\nclient.update(depth_bytes, pose=(x, y, theta), intrinsics=(fx, fy, cx, cy))",
+        "returns": "Dict with update status, timing"
+      }
     }
   }
 }
