@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-16T08:03:00Z",
+  "updated": "2026-02-16T08:04:00Z",
   "capabilities": {
     "yolo-detection": {
       "type": "model",
@@ -172,6 +172,31 @@
         "init": "client = ObstacleAvoidanceClient()",
         "example": "client.update_depth(depth_bytes, fx=615, fy=615, cx=320, cy=240)\ncmd = client.safe_velocity(target_vx=0.3)",
         "returns": "Dict with safe_vx, safe_omega, estop_active"
+      }
+    },
+    "lightweight-grasp-net": {
+      "type": "model",
+      "description": "Real-time parallel-jaw grasp detection using GR-ConvNet v2. Accepts RGB + depth images, returns ranked grasp candidates with position, angle, width, quality score, and 4x4 transforms. <50ms inference.",
+      "service_repo": "https://github.com/TidyBot-Services/lightweight-grasp-service",
+      "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/lightweight-grasp-service/main/client.py",
+      "api_docs": "https://github.com/TidyBot-Services/lightweight-grasp-service/blob/main/README.md",
+      "host": "http://158.130.109.188:8006",
+      "endpoints": [
+        "GET /health",
+        "POST /detect",
+        "GET /docs"
+      ],
+      "models": [
+        "gr-convnet-v2"
+      ],
+      "added_by": "steve",
+      "added_at": "2026-02-16",
+      "version": "0.1.0",
+      "usage": {
+        "import": "from service_clients.lightweight_grasp.client import LightweightGraspClient",
+        "init": "client = LightweightGraspClient()",
+        "example": "result = client.detect(rgb_bytes, depth_bytes, num_grasps=5)",
+        "returns": "Dict with grasps: list of {position: [x,y], angle, width, quality, transform (4x4)}"
       }
     }
   }
