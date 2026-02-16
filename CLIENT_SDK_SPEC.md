@@ -94,7 +94,7 @@ The docstring is the primary documentation for frontend agents. Include concrete
 <Service Name> — Python Client SDK
 
 Usage (inside robot code execution):
-    from services.<service_name>.client import <ClientClass>
+    from service_clients.<service_name>.client import <ClientClass>
     from robot_sdk import sensors
 
     client = <ClientClass>()
@@ -120,7 +120,7 @@ Below is a minimal complete `client.py` template. Copy and adapt for your servic
 <Service Name> — Python Client SDK
 
 Usage (inside robot code execution):
-    from services.<service_name>.client import <ServiceName>Client
+    from service_clients.<service_name>.client import <ServiceName>Client
     from robot_sdk import sensors
 
     client = <ServiceName>Client()
@@ -221,7 +221,7 @@ Add a `usage` field showing how a frontend agent imports and calls the client in
 ```json
 {
   "usage": {
-    "import": "from services.<service_name>.client import <ClientClass>",
+    "import": "from service_clients.<service_name>.client import <ClientClass>",
     "init": "client = <ClientClass>()",
     "example": "result = client.<method>(image_bytes, ...)",
     "returns": "Description of what the method returns"
@@ -237,13 +237,13 @@ After `sync_catalog.sh` runs, each service ends up at:
 
 ```
 tidybot-agent-server/
-  services/
+  service_clients/
     <service_name>/
       client.py       # Downloaded from client_sdk URL
       service.json    # Auto-generated metadata from catalog
 ```
 
-Frontend agents import as: `from services.<service_name>.client import <ClientClass>`
+Frontend agents import as: `from service_clients.<service_name>.client import <ClientClass>`
 
 ---
 
@@ -256,5 +256,5 @@ When creating or updating a service's `client.py`:
 - [ ] Accepts image input as `bytes`, file path, numpy array, or base64
 - [ ] Constructor has `host` parameter with correct default URL
 - [ ] Has `health()` method
-- [ ] Module docstring shows usage with `from services.<service_name>.client import ...`
+- [ ] Module docstring shows usage with `from service_clients.<service_name>.client import ...`
 - [ ] Catalog entry has `usage` field with import/init/example/returns
