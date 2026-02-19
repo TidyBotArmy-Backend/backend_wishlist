@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-16T08:04:00Z",
+  "updated": "2026-02-18T19:10:00Z",
   "capabilities": {
     "yolo-detection": {
       "type": "model",
@@ -28,29 +28,21 @@
     },
     "grounded-sam2": {
       "type": "model",
-      "description": "Open-vocabulary object detection (Grounding DINO) + segmentation (SAM 2). Accepts images and text prompts, returns bounding boxes, segmentation masks, and confidence scores.",
-      "service_repo": "https://github.com/TidyBot-Services/grounded-sam2-service",
-      "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/grounded-sam2-service/main/client.py",
-      "api_docs": "https://github.com/TidyBot-Services/grounded-sam2-service/blob/main/README.md",
+      "description": "Open-vocabulary object detection + segmentation. Accepts image + text prompts, returns bounding boxes, segmentation masks (PNG), and confidence scores. Uses Grounding DINO + SAM 2.",
+      "service_repo": "https://github.com/TidyBot-Services/grounded-sam2",
+      "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/grounded-sam2/main/client.py",
+      "api_docs": "https://github.com/TidyBot-Services/grounded-sam2/blob/main/README.md",
       "host": "http://158.130.109.188:8001",
       "endpoints": [
         "GET /health",
-        "POST /detect",
-        "POST /visualize",
+        "POST /predict",
         "GET /docs"
       ],
       "models": [
-        "grounding-dino-tiny",
-        "sam2.1-hiera-large"
+        "GroundingDINO_SwinT_OGC",
+        "SAM2.1-Hiera-Large"
       ],
-      "added_by": "steve",
-      "added_at": "2026-02-14",
-      "version": "0.2.0",
-      "usage": {
-        "import": "from service_clients.grounded_sam2.client import GroundedSAM2Client",
-        "example": "client = GroundedSAM2Client()\ndetections = client.detect(image_bytes, prompts=['red cup'])\n# Visualize with bbox + mask overlay:\nclient.visualize('input.jpg', prompts=['red cup'], save_path='output.jpg')",
-        "returns": "List of dicts with keys: label, confidence, bbox {x1,y1,x2,y2}"
-      }
+      "status": "deployed"
     },
     "graspgen": {
       "type": "model",
