@@ -7,7 +7,7 @@
       "service_repo": "https://github.com/TidyBot-Services/yolo-service",
       "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/yolo-service/main/client.py",
       "api_docs": "https://github.com/TidyBot-Services/yolo-service/blob/main/README.md",
-      "host": "http://158.130.109.188:8000",
+      "host": "http://158.130.109.188:8010",
       "endpoints": [
         "GET /health",
         "POST /detect",
