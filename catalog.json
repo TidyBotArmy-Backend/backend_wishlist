@@ -1,195 +1,195 @@
 {
-  "updated": "2026-02-18T19:10:00Z",
-  "capabilities": {
-    "yolo-detection": {
-      "type": "model",
-      "description": "YOLO object detection and instance segmentation. Supports multiple model sizes (nano to xlarge). Returns bounding boxes, class labels, confidence scores, and optional segmentation masks (polygon, RLE, or bitmap).",
-      "service_repo": "https://github.com/TidyBot-Services/yolo-service",
-      "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/yolo-service/main/client.py",
-      "api_docs": "https://github.com/TidyBot-Services/yolo-service/blob/main/README.md",
-      "host": "http://158.130.109.188:8000",
-      "endpoints": [
-        "GET /health",
-        "POST /detect",
-        "GET /docs"
-      ],
-      "models": [
-        "yolov8n",
-        "yolov8s",
-        "yolov8m",
-        "yolov8l",
-        "yolov8x",
-        "yolov8n-seg",
-        "yolov8s-seg"
-      ],
-      "added_by": "steve",
-      "added_at": "2026-02-13",
-      "version": "0.2.0"
-    },
-    "grounded-sam2": {
-      "type": "model",
-      "description": "Open-vocabulary object detection + segmentation. Accepts image + text prompts, returns bounding boxes, segmentation masks (PNG), and confidence scores. Uses Grounding DINO + SAM 2.",
-      "service_repo": "https://github.com/TidyBot-Services/grounded-sam2",
-      "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/grounded-sam2/main/client.py",
-      "api_docs": "https://github.com/TidyBot-Services/grounded-sam2/blob/main/README.md",
-      "host": "http://158.130.109.188:8001",
-      "endpoints": [
-        "GET /health",
-        "POST /predict",
-        "GET /docs"
-      ],
-      "models": [
-        "GroundingDINO_SwinT_OGC",
-        "SAM2.1-Hiera-Large"
-      ],
-      "status": "deployed"
-    },
-    "graspgen": {
-      "type": "model",
-      "description": "6-DOF grasp pose generation using Contact-GraspNet. Accepts depth images (optionally with object mask) and returns ranked candidate grasp poses as 4x4 homogeneous transforms with quality scores. Suitable for direct use with Franka arm.",
-      "service_repo": "https://github.com/TidyBot-Services/graspgen-service",
-      "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/graspgen-service/main/client.py",
-      "api_docs": "https://github.com/TidyBot-Services/graspgen-service/blob/main/README.md",
-      "host": "http://158.130.109.188:8002",
-      "endpoints": [
-        "GET /health",
-        "POST /generate",
-        "GET /docs"
-      ],
-      "models": [
-        "contact-graspnet-pytorch"
-      ],
-      "added_by": "steve",
-      "added_at": "2026-02-14",
-      "version": "0.1.0",
-      "usage": {
-        "import": "from service_clients.graspgen.client import GraspGenClient",
-        "example": "client = GraspGenClient()\ngrasps = client.generate(depth_bytes, num_grasps=10)",
-        "returns": "List of dicts with keys: transform (4x4), score, contact_point [x,y,z], gripper_opening"
-      }
-    },
-    "foundation-stereo": {
-      "type": "model",
-      "description": "Zero-shot stereo depth estimation using FoundationStereo (CVPR 2025). Accepts rectified stereo image pairs and returns dense disparity maps and metric depth in meters. Handles reflective/transparent surfaces where IR stereo fails.",
-      "service_repo": "https://github.com/TidyBot-Services/foundation-stereo-service",
-      "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/foundation-stereo-service/master/client.py",
-      "api_docs": "https://github.com/TidyBot-Services/foundation-stereo-service/blob/master/README.md",
-      "host": "http://158.130.109.188:8003",
-      "endpoints": [
-        "GET /health",
-        "POST /depth",
-        "GET /docs"
-      ],
-      "models": [
-        "foundation-stereo-vitl-23-51-11"
-      ],
-      "added_by": "steve",
-      "added_at": "2026-02-14",
-      "version": "1.0.0",
-      "usage": {
-        "import": "from service_clients.foundation_stereo.client import FoundationStereoClient",
-        "example": "client = FoundationStereoClient()\nresult = client.depth(left_bytes, right_bytes, focal_length=382.5, baseline=0.055)",
-        "returns": "Dict with depth (np.ndarray HxW float32 meters), disparity (np.ndarray), inference_ms"
-      }
-    },
-    "nav-mapping": {
-      "type": "service",
-      "description": "2D occupancy grid mapping from depth images + robot pose. A* path planning with obstacle inflation and frontier detection for autonomous exploration.",
-      "service_repo": "https://github.com/TidyBot-Services/nav-mapping-service",
-      "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/nav-mapping-service/master/client.py",
-      "api_docs": "https://github.com/TidyBot-Services/nav-mapping-service/blob/master/README.md",
-      "host": "http://158.130.109.188:8004",
-      "endpoints": [
-        "GET /health",
-        "POST /update",
-        "GET /map",
-        "POST /plan",
-        "GET /frontiers",
-        "POST /reset"
-      ],
-      "added_by": "steve",
-      "added_at": "2026-02-15",
-      "version": "0.1.0",
-      "usage": {
-        "import": "from service_clients.nav_mapping.client import NavMappingClient",
-        "example": "client = NavMappingClient()\nclient.update(depth_bytes, pose=(x, y, theta), intrinsics=(fx, fy, cx, cy))",
-        "returns": "Dict with update status, timing"
-      }
-    },
-    "realsense-slam": {
-      "type": "service",
-      "description": "Visual SLAM using Open3D ICP + OpenCV features. Provides 6-DOF pose estimation, incremental 3D point cloud mapping, 2D occupancy grid projection, and map persistence.",
-      "service_repo": "https://github.com/TidyBot-Services/realsense-slam",
-      "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/realsense-slam/master/client.py",
-      "api_docs": "https://github.com/TidyBot-Services/realsense-slam/blob/master/README.md",
-      "host": "http://158.130.109.188:8005",
-      "endpoints": [
-        "GET /health",
-        "POST /update",
-        "GET /pose",
-        "GET /map/pointcloud",
-        "GET /map/occupancy",
-        "POST /map/save",
-        "POST /map/load",
-        "POST /reset"
-      ],
-      "added_by": "steve",
-      "added_at": "2026-02-16",
-      "version": "0.1.0",
-      "usage": {
-        "import": "from client import SLAMClient",
-        "example": "client = SLAMClient()\nclient.update(rgb_bytes, depth_bytes, intrinsics=(fx, fy, cx, cy))\npose = client.get_pose()",
-        "returns": "Dict with 6-DOF pose (translation, quaternion, euler, matrix)"
-      }
-    },
-    "local-obstacle-avoidance": {
-      "type": "service",
-      "description": "Real-time local obstacle avoidance using depth images. Maintains a local 2D costmap (~3-5m range) and provides safe velocity commands via Dynamic Window Approach (DWA). Includes e-stop when obstacles are too close.",
-      "service_repo": "https://github.com/TidyBot-Services/local-obstacle-avoidance-service",
-      "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/local-obstacle-avoidance-service/master/client.py",
-      "api_docs": "https://github.com/TidyBot-Services/local-obstacle-avoidance-service/blob/master/README.md",
-      "host": "http://158.130.109.188:8007",
-      "endpoints": [
-        "GET /health",
-        "POST /update_depth",
-        "POST /safe_velocity",
-        "GET /costmap",
-        "GET /estop_status"
-      ],
-      "added_by": "steve",
-      "added_at": "2026-02-16",
-      "version": "0.1.0",
-      "usage": {
-        "import": "from service_clients.local_obstacle_avoidance.client import ObstacleAvoidanceClient",
-        "init": "client = ObstacleAvoidanceClient()",
-        "example": "client.update_depth(depth_bytes, fx=615, fy=615, cx=320, cy=240)\ncmd = client.safe_velocity(target_vx=0.3)",
-        "returns": "Dict with safe_vx, safe_omega, estop_active"
-      }
-    },
-    "lightweight-grasp-net": {
-      "type": "model",
-      "description": "Real-time parallel-jaw grasp detection using GR-ConvNet v2. Accepts RGB + depth images, returns ranked grasp candidates with position, angle, width, quality score, and 4x4 transforms. <50ms inference.",
-      "service_repo": "https://github.com/TidyBot-Services/lightweight-grasp-service",
-      "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/lightweight-grasp-service/main/client.py",
-      "api_docs": "https://github.com/TidyBot-Services/lightweight-grasp-service/blob/main/README.md",
-      "host": "http://158.130.109.188:8006",
-      "endpoints": [
-        "GET /health",
-        "POST /detect",
-        "GET /docs"
-      ],
-      "models": [
-        "gr-convnet-v2"
-      ],
-      "added_by": "steve",
-      "added_at": "2026-02-16",
-      "version": "0.1.0",
-      "usage": {
-        "import": "from service_clients.lightweight_grasp.client import LightweightGraspClient",
-        "init": "client = LightweightGraspClient()",
-        "example": "result = client.detect(rgb_bytes, depth_bytes, num_grasps=5)",
-        "returns": "Dict with grasps: list of {position: [x,y], angle, width, quality, transform (4x4)}"
-      }
+    "updated": "2026-02-18T19:10:00Z",
+    "capabilities": {
+        "yolo-detection": {
+            "type": "model",
+            "description": "YOLO object detection and instance segmentation. Supports multiple model sizes (nano to xlarge). Returns bounding boxes, class labels, confidence scores, and optional segmentation masks (polygon, RLE, or bitmap).",
+            "service_repo": "https://github.com/TidyBot-Services/yolo-service",
+            "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/yolo-service/main/client.py",
+            "api_docs": "https://github.com/TidyBot-Services/yolo-service/blob/main/README.md",
+            "host": "http://158.130.109.188:8000",
+            "endpoints": [
+                "GET /health",
+                "POST /detect",
+                "GET /docs"
+            ],
+            "models": [
+                "yolov8n",
+                "yolov8s",
+                "yolov8m",
+                "yolov8l",
+                "yolov8x",
+                "yolov8n-seg",
+                "yolov8s-seg"
+            ],
+            "added_by": "steve",
+            "added_at": "2026-02-13",
+            "version": "0.2.0"
+        },
+        "grounded-sam2": {
+            "type": "model",
+            "description": "Open-vocabulary object detection + segmentation. Accepts image + text prompts, returns bounding boxes, segmentation masks (PNG), and confidence scores. Uses Grounding DINO + SAM 2.",
+            "service_repo": "https://github.com/TidyBot-Services/grounded-sam2-service",
+            "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/grounded-sam2-service/main/client.py",
+            "api_docs": "https://github.com/TidyBot-Services/grounded-sam2-service/blob/main/README.md",
+            "host": "http://158.130.109.188:8001",
+            "endpoints": [
+                "GET /health",
+                "POST /predict",
+                "GET /docs"
+            ],
+            "models": [
+                "GroundingDINO_SwinT_OGC",
+                "SAM2.1-Hiera-Large"
+            ],
+            "status": "deployed"
+        },
+        "graspgen": {
+            "type": "model",
+            "description": "6-DOF grasp pose generation using Contact-GraspNet. Accepts depth images (optionally with object mask) and returns ranked candidate grasp poses as 4x4 homogeneous transforms with quality scores. Suitable for direct use with Franka arm.",
+            "service_repo": "https://github.com/TidyBot-Services/graspgen-service",
+            "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/graspgen-service/main/client.py",
+            "api_docs": "https://github.com/TidyBot-Services/graspgen-service/blob/main/README.md",
+            "host": "http://158.130.109.188:8002",
+            "endpoints": [
+                "GET /health",
+                "POST /generate",
+                "GET /docs"
+            ],
+            "models": [
+                "contact-graspnet-pytorch"
+            ],
+            "added_by": "steve",
+            "added_at": "2026-02-14",
+            "version": "0.1.0",
+            "usage": {
+                "import": "from service_clients.graspgen.client import GraspGenClient",
+                "example": "client = GraspGenClient()\ngrasps = client.generate(depth_bytes, num_grasps=10)",
+                "returns": "List of dicts with keys: transform (4x4), score, contact_point [x,y,z], gripper_opening"
+            }
+        },
+        "foundation-stereo": {
+            "type": "model",
+            "description": "Zero-shot stereo depth estimation using FoundationStereo (CVPR 2025). Accepts rectified stereo image pairs and returns dense disparity maps and metric depth in meters. Handles reflective/transparent surfaces where IR stereo fails.",
+            "service_repo": "https://github.com/TidyBot-Services/foundation-stereo-service",
+            "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/foundation-stereo-service/master/client.py",
+            "api_docs": "https://github.com/TidyBot-Services/foundation-stereo-service/blob/master/README.md",
+            "host": "http://158.130.109.188:8003",
+            "endpoints": [
+                "GET /health",
+                "POST /depth",
+                "GET /docs"
+            ],
+            "models": [
+                "foundation-stereo-vitl-23-51-11"
+            ],
+            "added_by": "steve",
+            "added_at": "2026-02-14",
+            "version": "1.0.0",
+            "usage": {
+                "import": "from service_clients.foundation_stereo.client import FoundationStereoClient",
+                "example": "client = FoundationStereoClient()\nresult = client.depth(left_bytes, right_bytes, focal_length=382.5, baseline=0.055)",
+                "returns": "Dict with depth (np.ndarray HxW float32 meters), disparity (np.ndarray), inference_ms"
+            }
+        },
+        "nav-mapping": {
+            "type": "service",
+            "description": "2D occupancy grid mapping from depth images + robot pose. A* path planning with obstacle inflation and frontier detection for autonomous exploration.",
+            "service_repo": "https://github.com/TidyBot-Services/nav-mapping-service",
+            "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/nav-mapping-service/master/client.py",
+            "api_docs": "https://github.com/TidyBot-Services/nav-mapping-service/blob/master/README.md",
+            "host": "http://158.130.109.188:8004",
+            "endpoints": [
+                "GET /health",
+                "POST /update",
+                "GET /map",
+                "POST /plan",
+                "GET /frontiers",
+                "POST /reset"
+            ],
+            "added_by": "steve",
+            "added_at": "2026-02-15",
+            "version": "0.1.0",
+            "usage": {
+                "import": "from service_clients.nav_mapping.client import NavMappingClient",
+                "example": "client = NavMappingClient()\nclient.update(depth_bytes, pose=(x, y, theta), intrinsics=(fx, fy, cx, cy))",
+                "returns": "Dict with update status, timing"
+            }
+        },
+        "realsense-slam": {
+            "type": "service",
+            "description": "Visual SLAM using Open3D ICP + OpenCV features. Provides 6-DOF pose estimation, incremental 3D point cloud mapping, 2D occupancy grid projection, and map persistence.",
+            "service_repo": "https://github.com/TidyBot-Services/realsense-slam",
+            "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/realsense-slam/master/client.py",
+            "api_docs": "https://github.com/TidyBot-Services/realsense-slam/blob/master/README.md",
+            "host": "http://158.130.109.188:8005",
+            "endpoints": [
+                "GET /health",
+                "POST /update",
+                "GET /pose",
+                "GET /map/pointcloud",
+                "GET /map/occupancy",
+                "POST /map/save",
+                "POST /map/load",
+                "POST /reset"
+            ],
+            "added_by": "steve",
+            "added_at": "2026-02-16",
+            "version": "0.1.0",
+            "usage": {
+                "import": "from client import SLAMClient",
+                "example": "client = SLAMClient()\nclient.update(rgb_bytes, depth_bytes, intrinsics=(fx, fy, cx, cy))\npose = client.get_pose()",
+                "returns": "Dict with 6-DOF pose (translation, quaternion, euler, matrix)"
+            }
+        },
+        "local-obstacle-avoidance": {
+            "type": "service",
+            "description": "Real-time local obstacle avoidance using depth images. Maintains a local 2D costmap (~3-5m range) and provides safe velocity commands via Dynamic Window Approach (DWA). Includes e-stop when obstacles are too close.",
+            "service_repo": "https://github.com/TidyBot-Services/local-obstacle-avoidance-service",
+            "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/local-obstacle-avoidance-service/master/client.py",
+            "api_docs": "https://github.com/TidyBot-Services/local-obstacle-avoidance-service/blob/master/README.md",
+            "host": "http://158.130.109.188:8007",
+            "endpoints": [
+                "GET /health",
+                "POST /update_depth",
+                "POST /safe_velocity",
+                "GET /costmap",
+                "GET /estop_status"
+            ],
+            "added_by": "steve",
+            "added_at": "2026-02-16",
+            "version": "0.1.0",
+            "usage": {
+                "import": "from service_clients.local_obstacle_avoidance.client import ObstacleAvoidanceClient",
+                "init": "client = ObstacleAvoidanceClient()",
+                "example": "client.update_depth(depth_bytes, fx=615, fy=615, cx=320, cy=240)\ncmd = client.safe_velocity(target_vx=0.3)",
+                "returns": "Dict with safe_vx, safe_omega, estop_active"
+            }
+        },
+        "lightweight-grasp-net": {
+            "type": "model",
+            "description": "Real-time parallel-jaw grasp detection using GR-ConvNet v2. Accepts RGB + depth images, returns ranked grasp candidates with position, angle, width, quality score, and 4x4 transforms. <50ms inference.",
+            "service_repo": "https://github.com/TidyBot-Services/lightweight-grasp-service",
+            "client_sdk": "https://raw.githubusercontent.com/TidyBot-Services/lightweight-grasp-service/main/client.py",
+            "api_docs": "https://github.com/TidyBot-Services/lightweight-grasp-service/blob/main/README.md",
+            "host": "http://158.130.109.188:8006",
+            "endpoints": [
+                "GET /health",
+                "POST /detect",
+                "GET /docs"
+            ],
+            "models": [
+                "gr-convnet-v2"
+            ],
+            "added_by": "steve",
+            "added_at": "2026-02-16",
+            "version": "0.1.0",
+            "usage": {
+                "import": "from service_clients.lightweight_grasp.client import LightweightGraspClient",
+                "init": "client = LightweightGraspClient()",
+                "example": "result = client.detect(rgb_bytes, depth_bytes, num_grasps=5)",
+                "returns": "Dict with grasps: list of {position: [x,y], angle, width, quality, transform (4x4)}"
+            }
+        }
     }
-  }
 }
